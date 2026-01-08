@@ -1,0 +1,7 @@
+"""
+Services for AI Command Center
+"""
+
+from services.document_service import DocumentService
+
+__all__ = ["DocumentService"]

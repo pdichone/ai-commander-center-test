@@ -50,6 +50,11 @@ class Settings:
     GPT4_INPUT_COST: float = 2.5
     GPT4_OUTPUT_COST: float = 10.0
     EMBEDDING_COST: float = 0.02
+    
+    # API Configuration
+    API_KEY: str = os.getenv("API_KEY", "dev-key-change-in-production")
+    CORS_ORIGINS: list = ["http://localhost:3000", "http://localhost:8501"]  # Streamlit
+    ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
 
     @classmethod
     def validate(cls) -> bool:

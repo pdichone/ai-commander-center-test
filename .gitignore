@@ -1,15 +1,13 @@
-# Environment
-.env
-.env.local
-
 # Python
-.venv/
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
 
 # Data
-data/vector_db/
+data/vector_db/*
 data/documents/*
 !data/documents/.gitkeep
 
@@ -17,12 +15,20 @@ data/documents/*
 *.log
 logs/
 
+# Environment
+.env
+.env.*
+
 # IDE
 .vscode/
 .idea/
-
-# OS
 .DS_Store
 
+# Git
+.git/
+.gitignore
+
 # Docker
+Dockerfile
+docker-compose.yml
 .dockerignore
