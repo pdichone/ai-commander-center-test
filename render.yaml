@@ -1,0 +1,34 @@
+services:
+  # FastAPI Backend
+  - type: web
+    name: ai-command-center-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: ENVIRONMENT
+        value: production
+      - key: API_KEY
+        sync: false  # Set manually in Render dashboard
+      - key: ANTHROPIC_API_KEY
+        sync: false  # Set manually in Render dashboard
+    healthCheckPath: /health
+
+  # Streamlit Frontend
+  - type: web
+    name: ai-command-center-ui
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run ui/streamlit_app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: API_BASE_URL
+        fromService:
+          name: ai-command-center-api
+          type: web
+          property: host
+      - key: API_KEY
+        sync: false  # Set manually in Render dashboard

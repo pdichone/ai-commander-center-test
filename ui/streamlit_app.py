@@ -5,6 +5,7 @@ Streamlit UI for AI Command Center
 import streamlit as st
 import requests
 import json
+import os
 from typing import Optional
 
 # Configure page
@@ -14,9 +15,9 @@ st.set_page_config(
     layout="wide"
 )
 
-# API Configuration
-API_BASE_URL = st.secrets.get("API_BASE_URL", "http://localhost:8000")
-API_KEY = st.secrets.get("API_KEY", "dev-key-change-in-production")
+# API Configuration - check env vars first (for Render), then secrets, then defaults
+API_BASE_URL = os.getenv("API_BASE_URL") or st.secrets.get("API_BASE_URL", "http://localhost:8000")
+API_KEY = os.getenv("API_KEY") or st.secrets.get("API_KEY", "dev-key-change-in-production")
 
 # Custom CSS
 st.markdown("""

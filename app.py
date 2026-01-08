@@ -1,6 +1,9 @@
-def main():
-    print("Hello from ai-command-center!")
+"""
+Main entry point for Render deployment.
+Re-exports the FastAPI app from api.main
+"""
 
+from api.main import app
 
-if __name__ == "__main__":
-    main()
+# This allows Render to use: uvicorn app:app
+__all__ = ["app"]
