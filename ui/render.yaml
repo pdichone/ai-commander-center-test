@@ -1,0 +1,16 @@
+# Render Blueprint for Streamlit UI
+# Deploy this as a separate Web Service on Render
+
+services:
+  - type: web
+    name: ai-command-center-ui
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    envVars:
+      - key: API_BASE_URL
+        value: https://ai-commander-center-test.onrender.com
+      - key: API_KEY
+        sync: false  # Set manually in Render dashboard
+      - key: PYTHON_VERSION
+        value: "3.11"
